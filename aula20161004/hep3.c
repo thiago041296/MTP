@@ -2,18 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 
-void recebeTexto(char *str){
+char *recebeTexto(char *str){
 
-    int c,tamanho=1;
+    int c,tamanho=0;
     do{
         c=getchar();
         if(c!='@'){
-            str[tamanho-1]=c;
             tamanho++;
-            str = realloc(str,tamanho*sizeof(char));
-            str[tamanho-1]='\0';
+            str[tamanho-1]=c;
+            str = realloc(str,(tamanho+1)*sizeof(char));
+            str[tamanho]='\0';
         }
     }while(c!='@');
+    return str;
 }
 
 int main(){
@@ -21,7 +22,7 @@ int main(){
     char *str = (char *) malloc(sizeof(char));
     str[0] = '\0';
     printf("Entre com o texto: ");
-    recebeTexto(str);
+    str = recebeTexto(str);
     printf("%s",str);
     return 0;
 }
